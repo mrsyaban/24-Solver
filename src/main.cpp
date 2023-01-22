@@ -1,13 +1,16 @@
 #include <iostream>
 #include <sstream>
+#include <fstream>
 #include <vector>
 #include <chrono>
-#include <algorithm>
+#include <string>
 
 using namespace std;
 using namespace std::chrono;
 
+vector<string> listSol;
 bool valid = true;
+
 int convertInput(string input){
     int num;
     if (input == "A"){
@@ -29,12 +32,8 @@ int convertInput(string input){
     }
 }
 
-vector<int> removeNum(vector<int> listNum, int num){
-    listNum.erase(remove(listNum.begin(), listNum.end(), num), listNum.end());
-    return listNum;
-}
 
-double translOp(double num1, double num2, char op){
+double operate(double num1, double num2, char op){
     if (op == '+'){
         return num1 + num2;
     } else if (op == '-'){
@@ -46,30 +45,61 @@ double translOp(double num1, double num2, char op){
     }
 }
 
+string concat(string num1, string num2, char op){
+    string res;
+    string opStr;
+    res = "("+ num1 +" " + opStr.append(1, op) + " " + num2 + ")";
+    return res; 
+}
+
+string convert(double num){
+    return to_string(int(num));
+}
+
 int numOfSol(double num1, double num2, double num3, double num4, char op1, char op2, char op3){
     int count = 0;
-    if (translOp(translOp(translOp(num1, num2, op1), num3, op2), num4, op3) == 24) {
-        // cout << "(((" << num1 << ' ' << op1 << ' ' << num2 << ") " << op2 << ' ' << num3 << ") " << op3 << ' ' << num4 << ')' << endl;    
-        // string = "(((" + 
-        // "(((" + to_string(num1) + ' ' + op1 + ' ' + num2 + ") " + op2 + ' ' + num3 + ") " + op3 + ' ' + num4 + ')';
+    string solution;
+    // ((num1 op1 num2) op2 num3) op3 num4 
+    if (operate(operate(operate(num1, num2, op1), num3, op2), num4, op3) == 24) {
+        // solution  = "(((" + to_string(num1) + " " + to_string(op1) + " " + to_string(num2) + ") " + to_string(op2) + " " + to_string(num3) + ") " + to_string(op3) + " " + to_string(num4) + ")";
+        solution = concat(concat(concat(convert(num1), convert(num2), op1), convert(num3), op2), convert(num4), op3);
+        listSol.push_back(solution);
         count++;
     }
-    if (translOp(translOp(num1, translOp(num2, num3, op2), op1), num4, op3) ==  24){
+    // (num1 op1 (num2 op2 num3)) op3 num4
+    if (operate(operate(num1, operate(num2, num3, op2), op1), num4, op3) ==  24){
+        solution = concat(concat(convert(num1), concat(convert(num2), convert(num3), op2), op1), convert(num4), op3);
+        listSol.push_back(solution);
         count++;
     }
-    if (translOp(num1, translOp(num2, translOp(num3, num4, op3), op2), op1) == 24){
+    // num1 op1 (num2 op2 (num3 op3 num4))
+    if (operate(num1, operate(num2, operate(num3, num4, op3), op2), op1) == 24){
+        solution = concat(convert(num1), concat(convert(num2), concat(convert(num3), convert(num4), op3), op2), op1);
+        listSol.push_back(solution);
         count++;
     }
-    if (translOp(num1, translOp(translOp(num2, num3, op2), num4, op3), op1) == 24){
+    // num1 op1 ((num2 op2 num3) op3 num4)
+    if (operate(num1, operate(operate(num2, num3, op2), num4, op3), op1) == 24){
+        solution = concat(convert(num1), concat(concat(convert(num2), convert(num3), op2), convert(num4), op3), op1);
+        listSol.push_back(solution);
         count++;
     }
-    if (translOp(translOp(num1, num2, op1), translOp(num3, num4, op3), op2) ==  24){
+    // (num1 op1 num2) op2 (num3 op3 num4)
+    if (operate(operate(num1, num2, op1), operate(num3, num4, op3), op2) ==  24){
+        solution = concat(concat(convert(num1), convert(num2), op1), concat(convert(num3), convert(num4), op3), op2);
+        listSol.push_back(solution);
         count++;
     }
-    // if (count > 0){
-    //     cout << count << endl;
-    // }
     return count;
+}
+
+vector<int> removeNum(vector<int> listNum, int num){
+    int count = 0;
+    while(listNum[count] != num){
+        count++;
+    }
+    listNum.erase(listNum.begin()+count);
+    return listNum;
 }
 
 int permut(vector<int> listNum, vector<char> listOp){
@@ -85,7 +115,6 @@ int permut(vector<int> listNum, vector<char> listOp){
                     for(auto op1: listOp){
                         for(auto op2: listOp){
                             for(auto op3: listOp){
-                                // cout << num1 << op1 << num2 << op2 << num3 << op3 << num4 << endl;
                                 count += numOfSol(num1, num2, num3, num4, op1, op2, op3);
                             }
                         }
@@ -100,7 +129,7 @@ int permut(vector<int> listNum, vector<char> listOp){
 vector<string> splitString(string str){
     string res = "";
     vector<string> splitRes;
-
+    str = str + " ";
     for(auto word: str){
         if (word == ' '){
             splitRes.push_back(res);
@@ -109,6 +138,7 @@ vector<string> splitString(string str){
             res += word;
         }
     }
+
     if (splitRes.size() != 4){
         valid = false;
     }
@@ -116,28 +146,50 @@ vector<string> splitString(string str){
 } 
 
 int main(){
-    
     string input;
-    cout << "Masukkan 4 Kartu : ";
-    cin >> input;
+    cout << "Enter 4 Cards :";
+    getline (cin, input);
+    
     auto start = high_resolution_clock::now();
     
     vector<string> listInput = splitString(input);
+    int a = convertInput(listInput[0]), b = convertInput(listInput[1]), c = convertInput(listInput[2]), d = convertInput(listInput[3]);
 
     if (!valid) {
-        cout << "Masukan tidak sesuai";
+        cout << "Incorrect input.";
     } else {
-        int a = convertInput(listInput[0]), b = convertInput(listInput[1]), c = convertInput(listInput[2]), d = convertInput(listInput[3]);
         vector<int> listNum{a,b,c,d};
         vector<char> listOp{'+','-','x','/'};
-        vector<string> listRes;
 
         int numOfSolution = permut(listNum, listOp);
-        cout << "Terdapat " << numOfSolution << " Solusi" << endl;
         auto stop = high_resolution_clock::now();
         auto duration = duration_cast<microseconds>(stop - start);
-        cout << "Time taken : " << duration.count() << " microseconds" << endl;
+        
+        if (numOfSolution > 0){
+            cout << numOfSolution << " Solutions found" << endl << endl;
+            for(auto sol: listSol){
+                cout << sol << endl;
+            }
+
+            string ans;
+            cout << "Do you want to save the solution? [yes/no] : ";
+            cin >> ans;
+            if (ans == "yes"){
+                string filesName;
+                cout << "Enter file's name (.txt) : ";
+                cin >> filesName;
+                ofstream out("..\\test\\" + filesName);
+                out << numOfSolution << " Solutions found" << endl;
+                for (auto solution: listSol){
+                    out << solution << endl;
+                }
+                out.close();
+            } else if (ans != "no") {
+                cout << "Incorrect Input";
+            }
+        } else {
+            cout << "There Is No Solution." << endl;
+        }
+        cout << endl << "Time taken : " << duration.count() << " microseconds" << endl;
     }
 }
-
-
