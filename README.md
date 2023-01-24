@@ -8,7 +8,11 @@ This program is used for generate all possible solutions for 24 cards game, wher
 * [bin/](./bin)
   * [main.exe](./bin/main.exe)
 * [doc/](./doc)
+<<<<<<< HEAD
   * [Laporan_Tucil1.pdf](./doc/Laporan_Tucil1.pdf)
+=======
+  * [Tucil1_K1_13521119_Muhammad Rizky Sya'ban.pdf](./doc/Tucil1_K1_13521119_Muhammad Rizky Sya'ban.pdf)
+>>>>>>> b1bf77580f322b2c3854897aadfe290ba2a54e4b
 * [src/](./src)
   * [24_solver.cpp](./src/24_solver.cpp)
 * [test/](./test)
