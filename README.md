@@ -6,18 +6,18 @@ This program is used for generate all possible solutions for 24 cards game, wher
 
 # Program Structure
 * [bin/](./Tucil1_13521119/bin)
-  * [main.exe](./Tucil1_13521119/bin/main.exe)
+  * [main.exe](./Tucil1_13521119/blob/main/bin/main.exe)
 * [doc/](./Tucil1_13521119/doc)
-  * [Laporan-Tucil1_13521119.pdf](./Tucil1_13521119/doc/Laporan-Tucil1_13521119.pdf)
+  * [Laporan-Tucil1_13521119.pdf](./Tucil1_13521119/blob/main/doc/Laporan-Tucil1_13521119.pdf)
 * [src/](./Tucil1_13521119/src)
-  * [24_solver.cpp](./Tucil1_13521119/src/24_solver.cpp)
+  * [24_solver.cpp](./Tucil1_13521119/blob/main/src/24_solver.cpp)
 * [test/](./Tucil1_13521119/test)
-  * [4th_Testing.txt](./Tucil1_13521119/tree/main/test/4th_Testing.txt)
-  * [5th_Testing.txt](./Tucil1_13521119/tree/main/test/5th_Testing.txt)
-  * [6th_Testing.txt](./Tucil1_13521119/tree/main/test/6th_Testing.txt)
-  * [7th_Testing.txt](./Tucil1_13521119/tree/main/test/7th_Testing.txt)
-  * [8th_Testing.txt](./Tucil1_13521119/tree/main/test/8th_Testing.txt)
-* [README.md](./Tucil1_13521119/README.md)
+  * [4th_Testing.txt](./Tucil1_13521119/blob/main/test/4th_Testing.txt)
+  * [5th_Testing.txt](./Tucil1_13521119/blob/main/test/5th_Testing.txt)
+  * [6th_Testing.txt](./Tucil1_13521119/blob/main/test/6th_Testing.txt)
+  * [7th_Testing.txt](./Tucil1_13521119/blob/main/test/7th_Testing.txt)
+  * [8th_Testing.txt](./Tucil1_13521119/blob/main/test/8th_Testing.txt)
+* [README.md](./Tucil1_13521119/blob/main/README.md)
 
 ## Requirement
 - GNU g++ compiler
