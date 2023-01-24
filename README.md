@@ -12,11 +12,11 @@ This program is used for generate all possible solutions for 24 cards game, wher
 * [src/](./Tucil1_13521119/src)
   * [24_solver.cpp](./Tucil1_13521119/src/24_solver.cpp)
 * [test/](./Tucil1_13521119/test)
-  * [4th_Testing.txt](./Tucil1_13521119/test/4th_Testing.txt)
-  * [5th_Testing.txt](./Tucil1_13521119/test/5th_Testing.txt)
-  * [6th_Testing.txt](./Tucil1_13521119/test/6th_Testing.txt)
-  * [7th_Testing.txt](./Tucil1_13521119/test/7th_Testing.txt)
-  * [8th_Testing.txt](./Tucil1_13521119/test/8th_Testing.txt)
+  * [4th_Testing.txt](./Tucil1_13521119/tree/main/test/4th_Testing.txt)
+  * [5th_Testing.txt](./Tucil1_13521119/tree/main/test/5th_Testing.txt)
+  * [6th_Testing.txt](./Tucil1_13521119/tree/main/test/6th_Testing.txt)
+  * [7th_Testing.txt](./Tucil1_13521119/tree/main/test/7th_Testing.txt)
+  * [8th_Testing.txt](./Tucil1_13521119/tree/main/test/8th_Testing.txt)
 * [README.md](./Tucil1_13521119/README.md)
 
 ## Requirement
